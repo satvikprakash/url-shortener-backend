@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+
+    <style>
+        table, th, td{
+            padding: 10px;
+            border: 1px solid black;
+            border-collapse: collapse;
+            border-radius: 5px;
+        }
+
+        table{
+            margin: 30px 0 0 20px;
+        }
+
+    </style>
+
+</head>
+<body>
+    <h1>URL SHORTENER</h1>
+
+    <% if(locals.id) { %>
+    <h2>Generated URL: <a href="http://localhost:8080/url/redirect/<%= id %>" target="_blank"> <%= id %> </a></h2>
+    <% } %>
+
+    <% if(locals.loginSuccessful) { %>
+    <h2><%= loginSuccessful %></h2>
+    <% } %>
+
+    <% if(locals.totalLength) { %>
+    <h2>Number of Short URLs created till date: <%= totalLength %></h2>
+    <% } %>
+
+    <form method="post" action="/url/create">
+        Enter Original URL: <input type="text" name="url" required>
+        <button type="submit">Generate Short ID</button>
+    </form>
+
+    <% if (locals.urls) { %>
+    <table>
+        <thead>
+            <th>ShortId</th>
+            <th>Redirect URL</th>
+            <th>Clicks</th>
+        </thead>
+
+        <tbody>
+            <% urls.forEach(url => { %>
+                <tr>
+                    <td><%= url.shortId %></td>
+                    <td>
+                        <a href="http://localhost:8080/url/redirect/<%= url.shortId %>" target="_blank"> <%= url.redirectUrl %> </a>
+                    </td>
+                    <td><%= url.visitHistory.length %></td>
+                </tr>
+            <% }); %>
+        </tbody>
+    </table>
+    <% }; %>
+</body>
+</html>
