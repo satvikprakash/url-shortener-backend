@@ -1,4 +1,5 @@
 URL Shortener API
+
 This project provides a URL Shortening Service, allowing users to convert long URLs into short, shareable links. The service generates a unique short identifier for each provided URL. It is built using Node.js and MongoDB, and is fully integrated with JSON Web Token (JWT) authentication for secure user registration and login.
 
 Key Features
